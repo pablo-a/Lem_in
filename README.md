@@ -1,12 +1,13 @@
 # Lem_in
 This **algorithmic** project is about finding the most efficient way to allow ants to reach the end of a labyrinth.  
-First, just clone this project and use the command **`make`** in order to build the binary then lauch it.
-Then, the user must enter a map :
+First, just clone this project and use the command **`make`** in order to build the binary then lauch it : **`./lem-in`**
+Then, you must enter a map :
 
 ## Map entry (Input)
 
+take care : if your input is wrong, the programm will be executed, even if there are missing informations.
 * define rooms like : **`name coordx coordy`**. (no `-` in rooms name)
-* define connections like : **`name1 name2`**.
+* define connections like : **`name1-name2`**.
 * use **`##START`** and **`##END`** before the line defining the starting or ending room.
 * You can enter comments, they must follow a `#`
 
