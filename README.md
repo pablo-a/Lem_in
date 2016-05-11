@@ -1,6 +1,7 @@
 # Lem_in
 This **algorithmic** project is about finding the most efficient way to allow ants to reach the end of a labyrinth (the less turns possible).  
-First, just clone this project and use the command **`make`** in order to build the binary then lauch it : **`./lem-in`**
+First, just clone this project and use the command **`make`** in order to build the binary then lauch it : **`./lem-in`**..
+After that, you must enter the number of ants.
 Then, you must enter a map :
 
 ### Map entry (Input)
