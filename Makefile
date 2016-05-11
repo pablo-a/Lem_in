@@ -1,6 +1,6 @@
 NAME		= lem-in
 
-CC			= GCC
+CC			= gcc
 FLAGS		= -Wall -Wextra -Werror
 
 LIB_PATH	= libft/
@@ -10,6 +10,7 @@ LIB_LINK	= -L $(LIB_PATH) -lft
 INCLUDES	= -I $(LIB_PATH)includes -I includes
 
 SRCS		= src/lemin.c \
+			  src/lst.c \
 
 OBJS 		= $(SRCS:src/%.c=obj/%.o)
 
@@ -27,7 +28,7 @@ obj:
 	mkdir -p obj
 
 obj/%.o: src/%.c includes/lemin.h
-	@$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
+	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $<
 
 clean:
 	@rm -f $(OBJS)

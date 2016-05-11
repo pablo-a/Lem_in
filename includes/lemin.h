@@ -6,12 +6,18 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/11 11:27:09 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/11 15:01:38 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
+
+#include <stdlib.h>
+
+# define NORMAL 0
+# define DEBUT 1
+# define FIN 2
 
 typedef struct	s_ant
 {
@@ -52,10 +58,24 @@ typedef struct	s_room
 {
 	char			*name;
 	int				id;
+	int				type;
 	int				coordx;
 	int				coordy;
 	int				id_ant;
 	struct s_links	*links;
 }				t_room;
+
+typedef struct	s_env
+{
+	int		nb_ants;
+
+}				t_env;
+
+
+t_links			*new_pile(void);
+int				pile_append(t_links *pile, t_room *room);
+int				pile_prepend(t_links *pile, t_room *room);
+int				free_pile(t_links **pile);
+int				show_pile(t_links *pile);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 12:02:22 by pabril            #+#    #+#             */
-/*   Updated: 2016/01/08 16:45:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/11 15:01:43 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int		get_next_line(int const fd, char **line)
 	{
 		if (buffer[0] == '\0')
 			ret = read(fd, buffer, BUFF_SIZE);
-		if (ret < 0)
-			return (-1);
 		len = check_newline(buffer);
+		if (ret < 0 || len == 0)
+			return (-1);
 		*line = fill_lines(*line, buffer, len);
 		if (buffer[len] != '\0' || (buffer[0] == '\0' && *line[0] != '\0'))
 		{
