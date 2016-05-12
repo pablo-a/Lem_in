@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/12 12:15:20 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/12 12:24:01 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_room	*get_value(char *str, t_room *tab[SIZE_TAB])
 	return (NULL);
 }
 
-int		remove(char *str, t_room *tab[SIZE_TAB])
+int		remove_hash(char *str, t_room *tab[SIZE_TAB])
 {
 	int index;
 

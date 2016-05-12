@@ -6,14 +6,14 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/12 12:04:02 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/12 12:25:14 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define SIZE_TAB 1024
 
@@ -77,7 +77,6 @@ typedef struct	s_room
 ** chaque case. contient les fourmis.
 */
 
-
 typedef struct	s_env
 {
 	int				nb_ants;
@@ -87,12 +86,23 @@ typedef struct	s_env
 
 }				t_env;
 
+/*
+*******************************************************************************
+*/
 
 t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);
 int				pile_prepend(t_links *pile, t_room *room);
 int				free_pile(t_links **pile);
 
+/*
+**fonctions propre a la table de hash
+*/
+
 int				hash(char *str);
+int				get_index(char *str, t_room *tab[SIZE_TAB]);
+int				insert_hash(char *str, t_room *room, t_room *tab[SIZE_TAB]);
+t_room			*get_value(char *str, t_room *tab[SIZE_TAB]);
+int				remove_hash(char *str, t_room *tab[SIZE_TAB]);
 
 #endif
