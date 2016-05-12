@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 11:18:40 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/11 13:12:07 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/12 12:15:23 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,5 @@ int		free_pile(t_links **pile)
 	}
 	free(*pile);
 	*pile = NULL;
-	return (1);
-}
-
-int		show_pile(t_room *room)
-{
-	t_node *toshow;
-
-	toshow = room->links->first;
-	ft_printf("room %d connected to : ", room->id);
-	while (toshow != NULL)
-	{
-		ft_printf("%d -> ", toshow->room->id);
-		toshow = toshow->next;
-	}
 	return (1);
 }

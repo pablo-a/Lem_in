@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/11 15:01:38 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/12 12:04:02 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 
 #include <stdlib.h>
 
+# define SIZE_TAB 1024
+
 # define NORMAL 0
 # define DEBUT 1
 # define FIN 2
 
+# define PARSE_ANT 0
+# define PARSE_ROOM 1
+# define PARSE_LINK 2
+
 typedef struct	s_ant
 {
-	int	id;
-	int	location;
+	int				id;
+	int				location;
+	struct s_ant	*next;
 }				t_ant;
 
 /*
@@ -57,17 +64,26 @@ typedef struct	s_node
 typedef struct	s_room
 {
 	char			*name;
-	int				id;
 	int				type;
 	int				coordx;
 	int				coordy;
 	int				id_ant;
+	struct s_room	*collision;
 	struct s_links	*links;
 }				t_room;
 
+/*
+** structure principale, contient une table de hash avec une salle dans
+** chaque case. contient les fourmis.
+*/
+
+
 typedef struct	s_env
 {
-	int		nb_ants;
+	int				nb_ants;
+
+	struct s_room	*tab_room[SIZE_TAB];
+	struct s_ant	*ants;
 
 }				t_env;
 
@@ -76,6 +92,7 @@ t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);
 int				pile_prepend(t_links *pile, t_room *room);
 int				free_pile(t_links **pile);
-int				show_pile(t_links *pile);
+
+int				hash(char *str);
 
 #endif
