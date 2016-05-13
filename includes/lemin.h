@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/12 12:57:38 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/13 12:09:58 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # define DEBUT 1
 # define FIN 2
 
-# define PARSE_ANT 0
-# define PARSE_ROOM 1
-# define PARSE_LINK 2
+# define PARSE_ERROR 0
+# define PARSE_ANT 1
+# define PARSE_ROOM 2
+# define PARSE_LINK 3
 
 typedef struct	s_ant
 {
@@ -82,13 +83,20 @@ typedef struct	s_env
 	int				nb_ants;
 
 	struct s_room	*tab_room[SIZE_TAB];
-	struct s_ant	*ants;
+	struct s_ant	**lst_ants;
 
 }				t_env;
 
 /*
-*******************************************************************************
+****************************** fonctions lemin *********************************
 */
+
+int				parse(t_env *env);
+int				get_ant(t_env *env, char *str);
+int				get_room(t_env *env, char *str);
+
+int				init_env(t_env *env);
+t_ant			*new_ant(void);
 
 t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);
