@@ -6,26 +6,26 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 14:03:48 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/13 14:38:00 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "get_next_line.h"
+#include "libft.h"
 
 int		get_ant(t_env *env, char *str)
 {
 	int nb_ant;
-	t_ant	ant;
 
 	if (env->lst_ants == NULL)
-		env->lst_ants = &(new_ant(&ant));
+		env->lst_ants = new_ant();
 	if (!(ft_isnumeric(str)))
 		return (PARSE_ERROR);
 	nb_ant = ft_atoi(str);
 	if (nb_ant <= 0)
 		return (PARSE_ERROR);
-	env->nb_ant = nb_ant;
+	env->nb_ants = nb_ant;
 	return (PARSE_ROOM);
 }
 
@@ -34,7 +34,8 @@ int		get_room(t_env *env, char *str)
 	int		type;
 	t_room	tempo;
 
-	if (ft_strchr(str, "-"))
+	type = NORMAL;
+	if (ft_strchr(str, '-'))
 		return (PARSE_LINK);
 	if (ft_strncmp(str, "##", 2))// traite les cas des types de salles
 	{
@@ -64,9 +65,10 @@ int		add_link(char *s1, char *s2, t_env *env)
 		ROOM(index2)->links = init_links();
 	pile_append(ROOM(index1)->links, ROOM(index2));
 	pile_append(ROOM(index1)->links, ROOM(index1));
+	return (1);
 }
 
-int		get_link(t_env *env, char *str);
+int		get_link(t_env *env, char *str)
 {
 	char	*name1;
 	char	*name2;
@@ -75,6 +77,8 @@ int		get_link(t_env *env, char *str);
 	i = 0;
 	while (str[i] != '-')
 		i++;
+	name1 = ft_strnew(20);
+	name2 = ft_strnew(20);
 	ft_strncpy(name1, str, i);
 	name2 = ft_strchr(str, '-') + 1;
 	add_link(name1, name2, env);
@@ -95,7 +99,7 @@ int		parse(t_env *env)
 		if (status == PARSE_LINK)
 			status = get_link(env, str);
 		if (status == PARSE_ERROR)
-			exit();
+			exit(1);
 	}
 	return (0);
 }

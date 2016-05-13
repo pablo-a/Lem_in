@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 14:27:18 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/13 14:34:23 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct	s_env
 {
 	int				nb_ants;
 	struct s_room	*tab_room[SIZE_TAB];
-	struct s_ant	**lst_ants;
+	struct s_ant	*lst_ants;
 
 }				t_env;
 
@@ -96,8 +96,12 @@ int				parse(t_env *env);
 int				get_ant(t_env *env, char *str);
 int				get_room(t_env *env, char *str);
 int				get_link(t_env *env, char *str);
+int				add_link(char *s1, char *s2, t_env *env);
 
 int				init_env(t_env *env);
+int				get_next_space(char *str);
+int				parse_room(t_env *env, t_room *room, char *str, int type);
+t_links			*init_links(void);
 t_ant			*new_ant(void);
 
 t_links			*new_pile(void);

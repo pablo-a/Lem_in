@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 13:57:47 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/13 14:29:53 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		get_next_space(char *str)
 	return (len);
 }
 
-int		parse_room(t_env *env, t_room *room, char *stri, int type)
+int		parse_room(t_env *env, t_room *room, char *str, int type)
 {
 	int		len;
 
@@ -58,7 +58,7 @@ t_links	*init_links(void)
 {
 	t_links	*link;
 
-	link = (t_links)malloc(sizeof(*link));
+	link = (t_links *)malloc(sizeof(*link));
 	if (link == NULL)
 		return (0);
 	link->lenght = 0;
@@ -71,7 +71,7 @@ t_ant	*new_ant(void)
 {
 	t_ant *ant;
 
-	ant = (t_ant)malloc(sizeof(*ant));
+	ant = (t_ant *)malloc(sizeof(*ant));
 	ant->id = 0;
 	ant->location = 0;
 	ant->next = NULL;
