@@ -12,6 +12,7 @@ INCLUDES	= -I $(LIB_PATH)includes -I includes
 SRCS		= src/lemin.c \
 			  src/lst.c \
 			  src/hash.c \
+			  src/init.c \
 
 OBJS 		= $(SRCS:src/%.c=obj/%.o)
 

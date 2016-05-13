@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/12 12:24:01 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/13 13:40:03 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,20 @@ int		hash(char *str)
 
 int		get_index(char *str, t_room *tab[SIZE_TAB])
 {
-	int hash;
 	int index;
 
 	index = 0;
-	hash = hash(str);
-	if (tab[hash] == NULL)
-		return (hash);
-	return (NULL);
+	index = hash(str);
+	if (tab[index] == NULL)
+		return (index);
+	return (-1);
 }
 
 int		insert_hash(char *str, t_room *room, t_room *tab[SIZE_TAB])
 {
 	int index;
 
-	if ((index = get_index(str, tab)) != NULL)
+	if ((index = get_index(str, tab)) != -1)
 	{
 		tab[index] = room;
 	}
@@ -51,8 +50,8 @@ t_room	*get_value(char *str, t_room *tab[SIZE_TAB])
 {
 	int index;
 
-	index = get_index(str);
-	if (index != NULL)
+	index = get_index(str, tab);
+	if (index != -1)
 		return (tab[index]);
 	return (NULL);
 }
@@ -61,8 +60,8 @@ int		remove_hash(char *str, t_room *tab[SIZE_TAB])
 {
 	int index;
 
-	index = get_index(str);
-	if (index != NULL)
+	index = get_index(str, tab);
+	if (index != -1)
 		tab[index] = NULL;
 	return (1);
 }
