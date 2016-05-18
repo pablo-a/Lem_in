@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 13:26:53 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 14:34:36 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int		add_link(char *s1, char *s2, t_env *env)
 
 	index1 = hash(s1);
 	index2 = hash(s2);
+	if (ft_strcmp(s1, s2) == 0)
+		return (0);
 	if (ROOM(index1) == NULL || ROOM(index2) == NULL)
 		exit(1);
 	if (ROOM(index1)->links == NULL)
@@ -98,6 +100,8 @@ int		get_link(t_env *env, char *str)
 	int		i;
 
 	i = 0;
+	else if (ft_strncmp(str, "#", 1) == 0)
+		return (PARSE_LINK);
 	while (str[i] != '-')
 		i++;
 	name1 = ft_strnew(i + 1);
@@ -122,7 +126,7 @@ int		parse(t_env *env)
 		if (status == PARSE_LINK)
 			status = get_link(env, str);
 		if (status == PARSE_ERROR)
-			exit(1);
+			ft_putendl("ERROR");
 	}
 	return (0);
 }

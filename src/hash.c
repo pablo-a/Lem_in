@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 12:30:07 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 14:22:07 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,30 @@ int		insert_tab(char *key, t_room *room, t_env *env)
 	{
 		ft_putendl("case pleine");
 		tempo = ROOM(index);
-		while (tempo->collision != NULL)
+		while (tempo->collision != NULL && ft_strcmp(tempo->name, key) != 0)
 			tempo = tempo->collision;
+		if (ft_strcmp(tempo->name, key) == 0)
+			return (0);
 		tempo->collision = room;
 	}
 	return (1);
 }
 
+t_room	*find_room(char *key, t_env *env)
+{
+	int		index;
+	t_room	*tempo;
+
+	index = hash(key);
+	if (ROOM(index) == NULL)
+		return (NULL);
+	tempo = ROOM(index)->collision;
+	if (ft_strcmp(ROOM(index)->name, key) == 0)
+		return (ROOM(index));
+	else
+	{
+		while (ft_strcmp(tempo->name, key) != 0)
+			tempo = tempo->collision;
+		return (tempo);
+	}
+}

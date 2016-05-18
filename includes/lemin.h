@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 13:26:36 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 13:59:56 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ int				free_pile(t_links **pile);
 int				hash(char *str);
 t_hashtable		*create_table(int size);
 int				insert_tab(char *key, t_room *room, t_env *env);
+t_room			*find_room(char *key, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 12:55:38 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 14:18:41 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int			parse_room(t_env *env, char *str, int type)
 	int		len;
 	t_room	*room;
 
-	room = (t_room *)malloc(sizeof(*room));
 	len = get_next_space(str);
+	room = (t_room *)malloc(sizeof(*room));
 	room->name = ft_strnew(len + 1);
 	ft_strncpy(room->name, str, len);
 	room->type = type;
