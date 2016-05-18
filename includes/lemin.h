@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 14:34:23 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 12:07:39 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 # define SIZE_TAB 1024
 
 # define NORMAL 0
-# define DEBUT 1
-# define FIN 2
+# define ENTRY 1
+# define EXIT 2
 
 # define PARSE_ERROR 0
 # define PARSE_ANT 1
 # define PARSE_ROOM 2
 # define PARSE_LINK 3
 
-# define ROOM(key) env->tab_room[key]
+# define ROOM(key) env->tab_room->tab[key]
 
 typedef struct	s_ant
 {
@@ -75,6 +75,12 @@ typedef struct	s_room
 	struct s_links	*links;
 }				t_room;
 
+typedef struct	s_hashtable
+{
+	int	size;
+	struct s_room	**tab;
+}				t_hashtable;
+
 /*
 ** structure principale, contient une table de hash avec une salle dans
 ** chaque case. contient les fourmis.
@@ -82,9 +88,9 @@ typedef struct	s_room
 
 typedef struct	s_env
 {
-	int				nb_ants;
-	struct s_room	*tab_room[SIZE_TAB];
-	struct s_ant	*lst_ants;
+	int					nb_ants;
+	struct s_hashtable	tab_room;
+	struct s_ant		*lst_ants;
 
 }				t_env;
 
@@ -98,9 +104,10 @@ int				get_room(t_env *env, char *str);
 int				get_link(t_env *env, char *str);
 int				add_link(char *s1, char *s2, t_env *env);
 
+t_hashtable		*create_table(int size);
 int				init_env(t_env *env);
 int				get_next_space(char *str);
-int				parse_room(t_env *env, t_room *room, char *str, int type);
+int				parse_room(t_env *env, char *str, int type);
 t_links			*init_links(void);
 t_ant			*new_ant(void);
 

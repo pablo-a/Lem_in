@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 13:40:03 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 11:13:10 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ int		insert_hash(char *str, t_room *room, t_room *tab[SIZE_TAB])
 {
 	int index;
 
-	if ((index = get_index(str, tab)) != -1)
+	ft_putendl("entre dans la fonction d'insertion hash");
+	index = get_index(str, tab);
+	if (index != -1)
 	{
+		ft_putendl("case vide");
 		tab[index] = room;
 	}
 	else
 	{
+		ft_putendl("case pleine");
 		while ((tab[index])->collision != NULL)
 			(tab[index])->collision = (tab[index])->collision->collision;
 		(tab[index])->collision = room;

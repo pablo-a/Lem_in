@@ -1,7 +1,7 @@
 NAME		= lem-in
 
 CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra
 
 LIB_PATH	= libft/
 LIB			= $(LIB_PATH)libft.a

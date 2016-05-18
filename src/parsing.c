@@ -6,18 +6,21 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 14:38:00 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 11:58:26 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
 #include "get_next_line.h"
+#include "ft_printf.h"
 #include "libft.h"
+#include "lemin.h"
 
 int		get_ant(t_env *env, char *str)
 {
 	int nb_ant;
 
+	if (str[0] == '#' && str[1] != '#')
+		return (PARSE_ANT);
 	if (env->lst_ants == NULL)
 		env->lst_ants = new_ant();
 	if (!(ft_isnumeric(str)))
@@ -26,29 +29,31 @@ int		get_ant(t_env *env, char *str)
 	if (nb_ant <= 0)
 		return (PARSE_ERROR);
 	env->nb_ants = nb_ant;
+	ft_printf("number of ants = %d\n", nb_ant);
 	return (PARSE_ROOM);
 }
 
 int		get_room(t_env *env, char *str)
 {
 	int		type;
-	t_room	tempo;
 
 	type = NORMAL;
 	if (ft_strchr(str, '-'))
 		return (PARSE_LINK);
-	if (ft_strncmp(str, "##", 2))// traite les cas des types de salles
+	if (ft_strncmp(str, "##", 2) == 0)// traite les cas des types de salles
 	{
-		if (ft_strncmp(str, "##start", 7))
-			type = DEBUT;
-		else if (ft_strncmp(str, "##end", 5))
-			type = FIN;
+		if (ft_strncmp(str, "##start", 7) == 0)
+			type = ENTRY;
+		else if (ft_strncmp(str, "##end", 5) == 0)
+			type = EXIT;
 		else
 			return (PARSE_ERROR);
-	}
-	else if (ft_strncmp(str, "#", 1))
+		ft_printf("type de salle : %d\n", type);
 		return (PARSE_ROOM);
-	parse_room(env, &tempo, str, type);
+	}
+	else if (ft_strncmp(str, "#", 1) == 0)
+		return (PARSE_ROOM);
+	parse_room(env, str, type);
 	return (PARSE_ROOM);
 }
 
@@ -90,14 +95,17 @@ int		parse(t_env *env)
 	char	*str;
 	int		status = PARSE_ANT;
 
+	ft_printf("entree dans la boucle\n");
 	while (get_next_line(0, &str) > 0)
 	{
+		ft_printf("status debut de boucle = %d\n", status);
 		if (status == PARSE_ANT)
 			status = get_ant(env, str);
 		else if (status == PARSE_ROOM)
 			status = get_room(env, str);
 		if (status == PARSE_LINK)
 			status = get_link(env, str);
+		ft_printf("status fin de boucle = %d\n", status);
 		if (status == PARSE_ERROR)
 			exit(1);
 	}

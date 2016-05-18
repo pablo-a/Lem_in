@@ -6,19 +6,36 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/13 14:29:53 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 12:05:57 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft.h"
 
-int		init_env(t_env *env)
+t_hashtable	*create_table(int size)
 {
-	t_room	*tab_room[SIZE_TAB];
+	t_hashtable	*table;
+	int			i;
 
+	i = 0;
+	if ((table = (t_hashtable *)malloc(sizeof(*table))) == NULL)
+		return (NULL);
+	if ((table->tab = (t_room **)malloc(sizeof(t_room *) * size)) == NULL)
+		return (NULL);
+	table->size = size;
+	while (i < SIZE_TAB)
+	{
+		table->tab[i] = NULL;
+		i++;
+	}
+	return (table);
+}
+
+int			init_env(t_env *env)
+{
 	env->nb_ants = 0;
-	ft_memcpy(env->tab_room, tab_room, sizeof(tab_room));
+	env->tab_room = create_table(SIZE_TAB);
 	env->lst_ants = NULL;
 	return (0);
 }
@@ -28,7 +45,7 @@ int		init_env(t_env *env)
 ** puis la stocke dans la table de hash.
 */
 
-int		get_next_space(char *str)
+int			get_next_space(char *str)
 {
 	int len;
 
@@ -38,11 +55,14 @@ int		get_next_space(char *str)
 	return (len);
 }
 
-int		parse_room(t_env *env, t_room *room, char *str, int type)
+int			parse_room(t_env *env, char *str, int type)
 {
 	int		len;
+	t_room	*room;
 
+	room = (t_room *)malloc(sizeof(*room));
 	len = get_next_space(str);
+	room->name = ft_strnew(len + 1);
 	ft_strncpy(room->name, str, len);
 	room->type = type;
 	room->coordx = 0;
@@ -54,7 +74,7 @@ int		parse_room(t_env *env, t_room *room, char *str, int type)
 	return (1);
 }
 
-t_links	*init_links(void)
+t_links		*init_links(void)
 {
 	t_links	*link;
 
@@ -67,7 +87,7 @@ t_links	*init_links(void)
 	return (link);
 }
 
-t_ant	*new_ant(void)
+t_ant		*new_ant(void)
 {
 	t_ant *ant;
 
