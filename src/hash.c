@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 11:13:10 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 12:30:07 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,54 +18,44 @@ int		hash(char *str)
 	return (ft_strhash(str) % SIZE_TAB);
 }
 
-int		get_index(char *str, t_room *tab[SIZE_TAB])
+t_hashtable	*create_table(int size)
 {
-	int index;
+	t_hashtable	*table;
+	int			i;
 
-	index = 0;
-	index = hash(str);
-	if (tab[index] == NULL)
-		return (index);
-	return (-1);
+	i = 0;
+	if ((table = (t_hashtable *)malloc(sizeof(*table))			) == NULL)
+		return (NULL);
+	if ((table->tab = (t_room **)malloc(sizeof(t_room *) * size)) == NULL)
+		return (NULL);
+	table->size = size;
+	while (i < SIZE_TAB)
+	{
+		table->tab[i] = NULL;
+		i++;
+	}
+	return (table);
 }
 
-int		insert_hash(char *str, t_room *room, t_room *tab[SIZE_TAB])
+int		insert_tab(char *key, t_room *room, t_env *env)
 {
-	int index;
+	int		index;
+	t_room	*tempo;
 
-	ft_putendl("entre dans la fonction d'insertion hash");
-	index = get_index(str, tab);
-	if (index != -1)
+	index = hash(key);
+	if (ROOM(index) == NULL)//case vide
 	{
 		ft_putendl("case vide");
-		tab[index] = room;
+		ROOM(index) = room;
 	}
 	else
 	{
 		ft_putendl("case pleine");
-		while ((tab[index])->collision != NULL)
-			(tab[index])->collision = (tab[index])->collision->collision;
-		(tab[index])->collision = room;
+		tempo = ROOM(index);
+		while (tempo->collision != NULL)
+			tempo = tempo->collision;
+		tempo->collision = room;
 	}
 	return (1);
 }
 
-t_room	*get_value(char *str, t_room *tab[SIZE_TAB])
-{
-	int index;
-
-	index = get_index(str, tab);
-	if (index != -1)
-		return (tab[index]);
-	return (NULL);
-}
-
-int		remove_hash(char *str, t_room *tab[SIZE_TAB])
-{
-	int index;
-
-	index = get_index(str, tab);
-	if (index != -1)
-		tab[index] = NULL;
-	return (1);
-}

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 11:58:26 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 13:26:53 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,27 @@ int		get_room(t_env *env, char *str)
 			type = EXIT;
 		else
 			return (PARSE_ERROR);
-		ft_printf("type de salle : %d\n", type);
-		return (PARSE_ROOM);
+		get_next_line(0, &str);
 	}
 	else if (ft_strncmp(str, "#", 1) == 0)
 		return (PARSE_ROOM);
+	ft_printf("type de salle : %d\n", type);
 	parse_room(env, str, type);
 	return (PARSE_ROOM);
+}
+
+int		already_link(int index1, char *tofind, t_env *env)
+{
+	t_node		*tempo;
+
+	tempo = ROOM(index1)->links->first;
+	while (tempo != NULL)
+	{
+		if (ft_strcmp(tempo->room->name, tofind) == 0)
+			return (1);
+		tempo = tempo->next;
+	}
+	return (0);
 }
 
 int		add_link(char *s1, char *s2, t_env *env)
@@ -64,12 +78,16 @@ int		add_link(char *s1, char *s2, t_env *env)
 
 	index1 = hash(s1);
 	index2 = hash(s2);
+	if (ROOM(index1) == NULL || ROOM(index2) == NULL)
+		exit(1);
 	if (ROOM(index1)->links == NULL)
 		ROOM(index1)->links = init_links();
 	if (ROOM(index2)->links == NULL)
 		ROOM(index2)->links = init_links();
+	if (already_link(index1, s2, env))
+		return (0);
 	pile_append(ROOM(index1)->links, ROOM(index2));
-	pile_append(ROOM(index1)->links, ROOM(index1));
+	pile_append(ROOM(index2)->links, ROOM(index1));
 	return (1);
 }
 
@@ -82,8 +100,8 @@ int		get_link(t_env *env, char *str)
 	i = 0;
 	while (str[i] != '-')
 		i++;
-	name1 = ft_strnew(20);
-	name2 = ft_strnew(20);
+	name1 = ft_strnew(i + 1);
+	name2 = ft_strnew(ft_strlen(str) - i);
 	ft_strncpy(name1, str, i);
 	name2 = ft_strchr(str, '-') + 1;
 	add_link(name1, name2, env);
@@ -95,17 +113,14 @@ int		parse(t_env *env)
 	char	*str;
 	int		status = PARSE_ANT;
 
-	ft_printf("entree dans la boucle\n");
 	while (get_next_line(0, &str) > 0)
 	{
-		ft_printf("status debut de boucle = %d\n", status);
 		if (status == PARSE_ANT)
 			status = get_ant(env, str);
 		else if (status == PARSE_ROOM)
 			status = get_room(env, str);
 		if (status == PARSE_LINK)
 			status = get_link(env, str);
-		ft_printf("status fin de boucle = %d\n", status);
 		if (status == PARSE_ERROR)
 			exit(1);
 	}

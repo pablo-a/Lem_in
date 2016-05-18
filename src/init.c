@@ -6,31 +6,12 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 12:05:57 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 12:55:38 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft.h"
-
-t_hashtable	*create_table(int size)
-{
-	t_hashtable	*table;
-	int			i;
-
-	i = 0;
-	if ((table = (t_hashtable *)malloc(sizeof(*table))) == NULL)
-		return (NULL);
-	if ((table->tab = (t_room **)malloc(sizeof(t_room *) * size)) == NULL)
-		return (NULL);
-	table->size = size;
-	while (i < SIZE_TAB)
-	{
-		table->tab[i] = NULL;
-		i++;
-	}
-	return (table);
-}
 
 int			init_env(t_env *env)
 {
@@ -70,7 +51,7 @@ int			parse_room(t_env *env, char *str, int type)
 	room->id_ant = -1;
 	room->collision = NULL;
 	room->links = NULL;
-	insert_hash(room->name, room, env->tab_room);
+	insert_tab(room->name, room, env);
 	return (1);
 }
 

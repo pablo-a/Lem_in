@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 12:07:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/18 13:26:36 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct	s_hashtable
 typedef struct	s_env
 {
 	int					nb_ants;
-	struct s_hashtable	tab_room;
+	struct s_hashtable	*tab_room;
 	struct s_ant		*lst_ants;
 
 }				t_env;
@@ -103,8 +103,8 @@ int				get_ant(t_env *env, char *str);
 int				get_room(t_env *env, char *str);
 int				get_link(t_env *env, char *str);
 int				add_link(char *s1, char *s2, t_env *env);
+int				already_link(int index1, char *tofind, t_env *env);
 
-t_hashtable		*create_table(int size);
 int				init_env(t_env *env);
 int				get_next_space(char *str);
 int				parse_room(t_env *env, char *str, int type);
@@ -121,9 +121,7 @@ int				free_pile(t_links **pile);
 */
 
 int				hash(char *str);
-int				get_index(char *str, t_room *tab[SIZE_TAB]);
-int				insert_hash(char *str, t_room *room, t_room *tab[SIZE_TAB]);
-t_room			*get_value(char *str, t_room *tab[SIZE_TAB]);
-int				remove_hash(char *str, t_room *tab[SIZE_TAB]);
+t_hashtable		*create_table(int size);
+int				insert_tab(char *key, t_room *room, t_env *env);
 
 #endif
