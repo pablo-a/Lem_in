@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 12:04:27 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 12:14:34 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_ant(t_env *env, char *str)
 	return (PARSE_ROOM);
 }
 
-int		check_room(t_env *env, char *str)
+int		check_room(char *str)
 {
 	size_t	i;
 	char	**tab;
@@ -62,7 +62,7 @@ int		get_room(t_env *env, char *str)
 	type = NORMAL;
 	if (str[0] == '#' && str[1] != '#')
 		return (PARSE_ROOM);
-	if (check_room(env, str) == 0)
+	if (check_room(str) == 0)
 		wrong_input();
 	if (ft_strchr(str, '-') && str[0] != '#')
 		return (PARSE_LINK);
@@ -141,8 +141,9 @@ int		get_link(t_env *env, char *str)
 int		parse(t_env *env)
 {
 	char	*str;
-	int		status = PARSE_ANT;
+	int		status;
 
+	status = PARSE_ANT;
 	while (get_next_line(0, &str) > 0)
 	{
 		if (status == PARSE_ANT)

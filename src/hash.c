@@ -6,14 +6,14 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 14:22:07 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 12:07:51 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft.h"
 
-int		hash(char *str)
+int			hash(char *str)
 {
 	return (ft_strhash(str) % SIZE_TAB);
 }
@@ -24,7 +24,7 @@ t_hashtable	*create_table(int size)
 	int			i;
 
 	i = 0;
-	if ((table = (t_hashtable *)malloc(sizeof(*table))			) == NULL)
+	if ((table = (t_hashtable *)malloc(sizeof(*table))) == NULL)
 		return (NULL);
 	if ((table->tab = (t_room **)malloc(sizeof(t_room *) * size)) == NULL)
 		return (NULL);
@@ -37,13 +37,13 @@ t_hashtable	*create_table(int size)
 	return (table);
 }
 
-int		insert_tab(char *key, t_room *room, t_env *env)
+int			insert_tab(char *key, t_room *room, t_env *env)
 {
 	int		index;
 	t_room	*tempo;
 
 	index = hash(key);
-	if (ROOM(index) == NULL)//case vide
+	if (ROOM(index) == NULL)
 	{
 		ft_putendl("case vide");
 		ROOM(index) = room;
@@ -61,7 +61,7 @@ int		insert_tab(char *key, t_room *room, t_env *env)
 	return (1);
 }
 
-t_room	*find_room(char *key, t_env *env)
+t_room		*find_room(char *key, t_env *env)
 {
 	int		index;
 	t_room	*tempo;

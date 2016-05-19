@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 11:08:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 12:14:17 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct	s_env
 int				parse(t_env *env);
 int				get_ant(t_env *env, char *str);
 int				get_room(t_env *env, char *str);
+int				check_room(char *str);
 int				get_link(t_env *env, char *str);
 int				add_link(char *s1, char *s2, t_env *env);
 int				already_link(int index1, char *tofind, t_env *env);
