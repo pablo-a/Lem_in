@@ -6,7 +6,7 @@
 #    By: pabril <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 12:46:26 by pabril            #+#    #+#              #
-#    Updated: 2016/05/12 11:08:10 by pabril           ###   ########.fr        #
+#    Updated: 2016/05/19 11:21:19 by pabril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC = ft_atoi.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  ft_strhash.c \
+	  ft_tablen.c \
 	  ft_printf.c \
 	  ft_print.c \
 	  ft_print2.c \

@@ -3,68 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 17:10:01 by pabril            #+#    #+#             */
-/*   Updated: 2015/12/04 16:38:26 by pabril           ###   ########.fr       */
+/*   Created: 2015/11/25 18:21:48 by tbui              #+#    #+#             */
+/*   Updated: 2016/05/19 12:00:46 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static	int		ft_split_len(const char *s, char c)
+static int		ft_count_words(char const *s, char c)
 {
-	int len;
+	int		i;
+	int		len;
 
+	i = 0;
 	len = 0;
-	while (s[len] != c)
-		len++;
+	while (s[i])
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			len++;
+		i++;
+	}
 	return (len);
 }
 
-static	void	ft_remplissage_tab(char **tab, const char *s, char c)
+static char		**ft_line_creator(const char *s, char **arr, char c, int amts)
 {
-	int index;
-	int len;
+	int		i;
+	int		k;
+	size_t	debut;
+	size_t	longeur;
 
-	index = 0;
-	while (*s == c)
-		s++;
-	while (*s)
+	i = 0;
+	k = 0;
+	while (s[i])
 	{
-		len = ft_split_len(s, c);
-		tab[index] = ft_strsub(s, 0, len);
-		while (*s != c && *s)
-			s++;
-		while (*s == c && *s)
-			s++;
-		index++;
+		if (s[i] != c && amts > 0)
+		{
+			amts--;
+			debut = i;
+			longeur = 0;
+			while (s[i] != '\0' && s[i] != c)
+			{
+				i++;
+				longeur++;
+			}
+			arr[k] = ft_strsub(s, debut, longeur);
+			k++;
+		}
+		i++;
 	}
-}
-
-static	int		ft_split_nb(const char *s, char c)
-{
-	int i;
-	int nb;
-
-	nb = 0;
-	i = 1;
-	while (s[i++])
-		if (s[i] == c && s[i - 1] != c)
-			nb++;
-	return (nb);
+	return (arr);
 }
 
 char			**ft_strsplit(const char *s, char c)
 {
-	char	**tab;
-	int		nb;
+	int		amt;
+	char	**arr;
 
-	nb = ft_split_nb(s, c);
-	tab = (char **)malloc((sizeof(char *) * nb + 1));
-	if (!tab)
+	amt = 0;
+	if (!s)
 		return (NULL);
-	ft_remplissage_tab(tab, s, c);
-	return (tab);
+	amt = ft_count_words(s, c);
+	if (!(arr = (char **)malloc(sizeof(char *) * (amt + 1))))
+		return (NULL);
+	ft_line_creator(s, arr, c, amt);
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 10:30:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/12 11:07:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 11:20:46 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ double			ft_sin(double x);
 double			ft_tan(double x);
 
 unsigned long	ft_strhash(char *str);
+size_t			ft_tablen(char **tab);
 #endif

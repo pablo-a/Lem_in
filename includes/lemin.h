@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 13:59:56 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 11:08:39 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int				get_next_space(char *str);
 int				parse_room(t_env *env, char *str, int type);
 t_links			*init_links(void);
 t_ant			*new_ant(void);
+
+int				incomplete_input(void);
+int				wrong_input(void);
 
 t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);

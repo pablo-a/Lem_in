@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/18 14:34:36 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 12:04:27 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,51 @@ int		get_ant(t_env *env, char *str)
 	return (PARSE_ROOM);
 }
 
+int		check_room(t_env *env, char *str)
+{
+	size_t	i;
+	char	**tab;
+
+	tab = ft_strsplit(str, ' ');
+	i = ft_tablen(tab);
+	if (tab[0][0] == '#' && tab[0][1] == '#')
+		return (1);
+	if (i == 3)
+	{
+		if (ft_strchr(str, '-') != NULL || !ft_isnumeric(tab[1]) ||
+				!ft_isnumeric(tab[2]))
+			return (0);
+		return (1);
+	}
+	else if (i == 1 && ft_strchr(tab[0], '-') != NULL)//enlever les rooms sans coord
+		return (1);
+	else
+		return (0);
+}
+
 int		get_room(t_env *env, char *str)
 {
 	int		type;
 
 	type = NORMAL;
-	if (ft_strchr(str, '-'))
+	if (str[0] == '#' && str[1] != '#')
+		return (PARSE_ROOM);
+	if (check_room(env, str) == 0)
+		wrong_input();
+	if (ft_strchr(str, '-') && str[0] != '#')
 		return (PARSE_LINK);
 	if (ft_strncmp(str, "##", 2) == 0)// traite les cas des types de salles
 	{
-		if (ft_strncmp(str, "##start", 7) == 0)
+		if (ft_strcmp(str, "##start") == 0)
 			type = ENTRY;
-		else if (ft_strncmp(str, "##end", 5) == 0)
+		else if (ft_strcmp(str, "##end") == 0)
 			type = EXIT;
 		else
-			return (PARSE_ERROR);
+			return (PARSE_ROOM);
 		get_next_line(0, &str);
+		while (str[0] == '#' && str[1] != '#')
+			get_next_line(0, &str);
 	}
-	else if (ft_strncmp(str, "#", 1) == 0)
-		return (PARSE_ROOM);
 	ft_printf("type de salle : %d\n", type);
 	parse_room(env, str, type);
 	return (PARSE_ROOM);
@@ -81,7 +107,7 @@ int		add_link(char *s1, char *s2, t_env *env)
 	if (ft_strcmp(s1, s2) == 0)
 		return (0);
 	if (ROOM(index1) == NULL || ROOM(index2) == NULL)
-		exit(1);
+		wrong_input();
 	if (ROOM(index1)->links == NULL)
 		ROOM(index1)->links = init_links();
 	if (ROOM(index2)->links == NULL)
@@ -100,7 +126,7 @@ int		get_link(t_env *env, char *str)
 	int		i;
 
 	i = 0;
-	else if (ft_strncmp(str, "#", 1) == 0)
+	if (str[0] == '#')
 		return (PARSE_LINK);
 	while (str[i] != '-')
 		i++;
@@ -126,7 +152,9 @@ int		parse(t_env *env)
 		if (status == PARSE_LINK)
 			status = get_link(env, str);
 		if (status == PARSE_ERROR)
-			ft_putendl("ERROR");
+			incomplete_input();
 	}
+	if (status < PARSE_LINK)
+		incomplete_input();
 	return (0);
 }

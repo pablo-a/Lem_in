@@ -14,6 +14,7 @@ SRCS		= src/lemin.c \
 			  src/hash.c \
 			  src/init.c \
 			  src/parsing.c \
+			  src/error.c \
 
 OBJS 		= $(SRCS:src/%.c=obj/%.o)
 
