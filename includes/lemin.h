@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 12:14:17 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 14:20:40 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-# define SIZE_TAB 1024
+# define SIZE_TAB 10000
 
 # define NORMAL 0
 # define ENTRY 1
@@ -71,6 +71,7 @@ typedef struct	s_room
 	int				coordx;
 	int				coordy;
 	int				id_ant;
+	int				visite;
 	struct s_room	*collision;
 	struct s_links	*links;
 }				t_room;
@@ -89,6 +90,8 @@ typedef struct	s_hashtable
 typedef struct	s_env
 {
 	int					nb_ants;
+	struct s_room		*starting_room;
+	struct s_room		*ending_room;
 	struct s_hashtable	*tab_room;
 	struct s_ant		*lst_ants;
 
@@ -114,6 +117,7 @@ t_ant			*new_ant(void);
 
 int				incomplete_input(void);
 int				wrong_input(void);
+int				wrong_map(void);
 
 t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);
@@ -128,5 +132,8 @@ int				hash(char *str);
 t_hashtable		*create_table(int size);
 int				insert_tab(char *key, t_room *room, t_env *env);
 t_room			*find_room(char *key, t_env *env);
+
+int				possible_to_resolve(t_env *env, t_room *current_pos);
+int				resolve(t_env *env);
 
 #endif

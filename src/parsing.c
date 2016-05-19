@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 12:14:34 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 14:09:45 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ int		check_room(char *str)
 
 	tab = ft_strsplit(str, ' ');
 	i = ft_tablen(tab);
+	ft_printf("len = %zd\n", i);
 	if (tab[0][0] == '#' && tab[0][1] == '#')
 		return (1);
 	if (i == 3)
 	{
 		if (ft_strchr(str, '-') != NULL || !ft_isnumeric(tab[1]) ||
 				!ft_isnumeric(tab[2]))
+		{
 			return (0);
+		}
 		return (1);
 	}
 	else if (i == 1 && ft_strchr(tab[0], '-') != NULL)//enlever les rooms sans coord

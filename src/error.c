@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 10:53:18 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 11:08:33 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 13:54:11 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ int		wrong_input(void)
 {
 	ft_putendl("WRONG INPUT");
 	exit(0);
+}
+
+int		wrong_map(void)
+{
+	ft_putendl("WRONG MAP");
+	exit (0);
 }

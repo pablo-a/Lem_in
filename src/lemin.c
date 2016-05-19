@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 12:16:23 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 12:13:32 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/19 13:55:42 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int		main(void)
 	init_env(&env);
 	parse(&env);
 	show_tab(env);
+	resolve(&env);
 	return (0);
 }
