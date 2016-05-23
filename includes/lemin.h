@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 14:20:40 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 11:17:15 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct	s_room
 
 typedef struct	s_hashtable
 {
-	int	size;
+	int				size;
 	struct s_room	**tab;
 }				t_hashtable;
 
@@ -98,16 +98,26 @@ typedef struct	s_env
 }				t_env;
 
 /*
-****************************** fonctions lemin *********************************
+****************************** FUNCTIONS LEMIN *********************************
+*/
+
+/*
+**************************** PARSING *******************************************
 */
 
 int				parse(t_env *env);
 int				get_ant(t_env *env, char *str);
+
 int				get_room(t_env *env, char *str);
 int				check_room(char *str);
+
 int				get_link(t_env *env, char *str);
 int				add_link(char *s1, char *s2, t_env *env);
-int				already_link(int index1, char *tofind, t_env *env);
+int				already_link(t_room *room, char *tofind);
+
+/*
+** ********************* INIT ENV AND ERRORS ***********************************
+*/
 
 int				init_env(t_env *env);
 int				get_next_space(char *str);
@@ -125,13 +135,17 @@ int				pile_prepend(t_links *pile, t_room *room);
 int				free_pile(t_links **pile);
 
 /*
-**fonctions propre a la table de hash
+** *********************** HASH TABLE ******************************************
 */
 
 int				hash(char *str);
 t_hashtable		*create_table(int size);
 int				insert_tab(char *key, t_room *room, t_env *env);
 t_room			*find_room(char *key, t_env *env);
+
+/*
+** ************************** RESOLVE FUNCTIONS ********************************
+*/
 
 int				possible_to_resolve(t_env *env, t_room *current_pos);
 int				resolve(t_env *env);

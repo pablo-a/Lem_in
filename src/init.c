@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 13:53:45 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 10:24:57 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,6 @@ int			get_next_space(char *str)
 	while (str[len] != ' ')
 		len++;
 	return (len);
-}
-
-int			parse_room(t_env *env, char *str, int type)
-{
-	int		len;
-	t_room	*room;
-
-	len = get_next_space(str);
-	room = (t_room *)malloc(sizeof(*room));
-	room->name = ft_strnew(len + 1);
-	ft_strncpy(room->name, str, len);
-	room->type = type;
-	room->coordx = 0;
-	room->coordy = 0;
-	room->visite = 0;
-	room->id_ant = -1;
-	room->collision = NULL;
-	room->links = NULL;
-	insert_tab(room->name, room, env);
-	if (type == ENTRY)
-		env->starting_room = find_room(room->name, env);
-	if (type == EXIT)
-		env->ending_room = find_room(room->name, env);
-	return (1);
 }
 
 t_links		*init_links(void)

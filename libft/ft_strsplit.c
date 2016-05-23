@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 18:21:48 by tbui              #+#    #+#             */
-/*   Updated: 2016/05/19 12:00:46 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 10:48:15 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ char			**ft_strsplit(const char *s, char c)
 	if (!(arr = (char **)malloc(sizeof(char *) * (amt + 1))))
 		return (NULL);
 	ft_line_creator(s, arr, c, amt);
+	arr[amt] = NULL;
 	return (arr);
 }

@@ -14,6 +14,8 @@ SRCS		= src/lemin.c \
 			  src/hash.c \
 			  src/init.c \
 			  src/parsing.c \
+			  src/parse_room.c \
+			  src/parse_link.c \
 			  src/error.c \
 			  src/resolve.c \
 
