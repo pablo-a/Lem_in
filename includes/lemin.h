@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 11:17:15 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 14:03:26 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@
 
 # define ROOM(key) env->tab_room->tab[key]
 
+# define ERROR(str) ft_putendl(str); exit(0)
+
 typedef struct	s_ant
 {
 	int				id;
-	int				location;
+	struct s_room	*location;
 	struct s_ant	*next;
 }				t_ant;
 
@@ -67,12 +69,14 @@ typedef struct	s_node
 typedef struct	s_room
 {
 	char			*name;
+	int				poids;
 	int				type;
 	int				coordx;
 	int				coordy;
-	int				id_ant;
 	int				visite;
+	struct s_ant	*id_ant;
 	struct s_room	*collision;
+	struct s_room	*father;
 	struct s_links	*links;
 }				t_room;
 
@@ -108,6 +112,7 @@ typedef struct	s_env
 int				parse(t_env *env);
 int				get_ant(t_env *env, char *str);
 
+int				parse_room(t_env *env, char *str, int type);
 int				get_room(t_env *env, char *str);
 int				check_room(char *str);
 
@@ -119,11 +124,11 @@ int				already_link(t_room *room, char *tofind);
 ** ********************* INIT ENV AND ERRORS ***********************************
 */
 
+t_ant			*new_ant(int id, t_env *env);
+int				init_ants(t_env *env);
 int				init_env(t_env *env);
 int				get_next_space(char *str);
-int				parse_room(t_env *env, char *str, int type);
 t_links			*init_links(void);
-t_ant			*new_ant(void);
 
 int				incomplete_input(void);
 int				wrong_input(void);

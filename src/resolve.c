@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 14:16:23 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 13:41:50 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int		possible_to_resolve(t_env *env, t_room *current_pos)
 		{
 			if (current_voisin->room->visite == 0)
 				if (possible_to_resolve(env, current_voisin->room) == 1)
+				{
+					current_pos->visite = 0;
 					return (1);
+				}
 			current_voisin = current_voisin->next;
 		}
 	}
+	current_pos->visite = 0;
 	return (0);
 }
 
@@ -40,6 +44,9 @@ int		resolve(t_env *env)
 {
 	if (env->starting_room == NULL || env->ending_room == NULL)
 		wrong_map();
-	printf("%d\n", possible_to_resolve(env, env->starting_room));
+	if (!possible_to_resolve(env, env->starting_room))
+		ERROR("de la daube");
+	init_ants(env);
+	set_shortest_path(env, env->starting_room);
 	return (1);
 }

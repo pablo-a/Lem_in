@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:14:11 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 11:10:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 14:03:19 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int		parse_room(t_env *env, char *str, int type)
 	room->coordx = 0;
 	room->coordy = 0;
 	room->visite = 0;
-	room->id_ant = -1;
+	room->id_ant = NULL;
 	room->collision = NULL;
 	room->links = NULL;
+	room->father = NULL;
+	room->poids = (type == ENTRY ? 0 : -1);
 	insert_tab(room->name, room, env);
 	if (type == ENTRY)
 		env->starting_room = find_room(room->name, env);
