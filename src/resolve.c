@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 13:41:50 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 17:08:48 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		resolve(t_env *env)
 	if (env->starting_room == NULL || env->ending_room == NULL)
 		wrong_map();
 	if (!possible_to_resolve(env, env->starting_room))
-		ERROR("de la daube");
+		ERROR("impossible a resoudre : bad map");
 	init_ants(env);
 	set_shortest_path(env, env->starting_room);
 	return (1);

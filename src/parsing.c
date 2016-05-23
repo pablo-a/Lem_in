@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 10:31:41 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 16:33:31 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int		get_ant(t_env *env, char *str)
 
 	if (str[0] == '#' && str[1] != '#')
 		return (PARSE_ANT);
-	if (env->lst_ants == NULL)
-		env->lst_ants = new_ant();
 	if (!(ft_isnumeric(str)))
 		return (PARSE_ERROR);
 	nb_ant = ft_atoi(str);

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:14:11 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 14:03:19 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 17:08:50 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		check_room(char *str)
 	tab = ft_strsplit(str, ' ');
 	i = ft_tablen(tab);
 	ft_printf("len = %zd\n", i);
-	if (tab[0][0] == '#' && tab[0][1] == '#')
+	if (tab[0][0] == '#' && tab[0][1] == '#' && tab[0][2] != '#')
 		return (1);
 	if (i == 3)
 	{

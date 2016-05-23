@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 14:03:26 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/23 16:29:37 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int				already_link(t_room *room, char *tofind);
 ** ********************* INIT ENV AND ERRORS ***********************************
 */
 
-t_ant			*new_ant(int id, t_env *env);
+int				new_ant(int id, t_env *env);
 int				init_ants(t_env *env);
 int				init_env(t_env *env);
 int				get_next_space(char *str);
