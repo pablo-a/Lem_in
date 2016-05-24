@@ -11,6 +11,7 @@ INCLUDES	= -I $(LIB_PATH)includes -I includes
 
 SRCS		= src/lemin.c \
 			  src/lst.c \
+			  src/pile_pathes.c \
 			  src/hash.c \
 			  src/init.c \
 			  src/parsing.c \

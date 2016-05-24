@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 11:21:37 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 13:36:48 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,19 @@ typedef struct	s_path_pile
 
 typedef struct	s_path
 {
-	int				len;
-	struct s_room	*room;
-	struct s_path	*next;
+	int					len;
+	struct s_path		*next_path;
+	struct s_path		*prev_path;
+	struct s_node_path	*first;
+	struct s_node_path	*last;
 }				t_path;
+
+typedef struct	s_node_path
+{
+	struct s_room		*room;
+	struct s_node_path	*next;
+	struct s_node_path	*prev;
+}				t_node_path;
 
 /*
 ** structure principale, contient une table de hash avec une salle dans
@@ -134,6 +143,7 @@ int				parse_room(t_env *env, char *str, int type);
 int				get_room(t_env *env, char *str);
 int				check_room(char *str);
 
+t_links			*init_links(void);
 int				get_link(t_env *env, char *str);
 int				add_link(char *s1, char *s2, t_env *env);
 int				already_link(t_room *room, char *tofind);
@@ -145,8 +155,8 @@ int				already_link(t_room *room, char *tofind);
 int				new_ant(int id, t_env *env);
 int				init_ants(t_env *env);
 int				init_env(t_env *env);
+int				init_pathes(t_env *env);
 int				get_next_space(char *str);
-t_links			*init_links(void);
 
 int				incomplete_input(void);
 int				wrong_input(void);
@@ -156,6 +166,10 @@ t_links			*new_pile(void);
 int				pile_append(t_links *pile, t_room *room);
 int				pile_prepend(t_links *pile, t_room *room);
 int				free_pile(t_links **pile);
+
+t_path			*new_path(void);
+int				append_path(t_path_pile *pile_path, t_path *path);
+int				append_node_path(t_path *path, t_room *room);
 
 /*
 ** *********************** HASH TABLE ******************************************
@@ -170,6 +184,8 @@ t_room			*find_room(char *key, t_env *env);
 ** ************************** RESOLVE FUNCTIONS ********************************
 */
 
+int				mark_path(t_env *env, int num, t_room *current_pos);
+int				get_marked_path(t_env *env, t_room *current_pos);
 int				possible_to_resolve(t_env *env, t_room *current_pos);
 int				resolve(t_env *env);
 

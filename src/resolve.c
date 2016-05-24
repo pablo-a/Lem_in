@@ -6,12 +6,13 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 11:37:39 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 13:45:38 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft.h"
+#include "ft_printf.h"
 
 #define LINK current_pos->links
 
@@ -52,17 +53,52 @@ int		mark_path(t_env *env, int num, t_room *current_pos)
 		current_voisin = LINK->first;
 		while (current_voisin != NULL)
 		{
-			if (VISITE(current_voisin->room) == 0 && (POIDS(current_pos) + 1
-				< POIDS(current_voisin) || POIDS(current_voisin == -1)))
+			if (VISITE(current_voisin->room) == 0 && (POIDS(current_pos) + 1 <
+			POIDS(current_voisin->room) || POIDS(current_voisin->room) == -1))
 			{
-				POIDS(current_voisin) = POIDS(current_pos) + 1;
-				PERE(current_voisin) = current_pos;
+				POIDS(current_voisin->room) = POIDS(current_pos) + 1;
+				PERE(current_voisin->room) = current_pos;
 			}
-			if (next_room == NULL || (POIDS(current_voisin) < POIDS(next_room)))
-				next_room = current_voisin;
+			if (next_room == NULL || (POIDS(current_voisin->room) <
+						POIDS(next_room)))
+				next_room = current_voisin->room;
 			current_voisin = current_voisin->next;
 		}
 		mark_path(env, num, next_room);
+	}
+	return (1);
+}
+
+int		get_marked_path(t_env *env, t_room *current_pos)
+{
+	t_path	*path;
+
+	path = new_path();
+	while (current_pos->type != ENTRY)
+	{
+		append_node_path(path, current_pos);
+		current_pos = PERE(current_pos);
+	}
+	append_path(env->pathes, path);
+	return (1);
+}
+
+int		show_pathes(t_env *env)
+{
+	t_path		*path;
+	t_node_path	*node;
+
+	ft_printf("%d path trouvees.\n", env->pathes->nb_path);
+	path = env->pathes->first;
+	while (path != NULL)
+	{
+		node = path->last;
+		while (node->prev != NULL)
+		{
+			ft_printf(" ==> %s\n", node->room->name);
+			node = node->prev;
+		}
+		path = path->next_path;
 	}
 	return (1);
 }
@@ -75,9 +111,12 @@ int		resolve(t_env *env)
 	if (env->starting_room == NULL || env->ending_room == NULL)
 		wrong_map();
 	if (!possible_to_resolve(env, env->starting_room))
-		ERROR("impossible a resoudre : bad map");
+		wrong_map();
+	ft_printf("ca commence!\n");
 	init_ants(env);
+	init_pathes(env);
 	while (mark_path(env, numero_path, env->starting_room) == 1)
-		get_marked_path(env, &numero_path, env->starting_room);
+		get_marked_path(env, env->ending_room);
+	show_pathes(env);
 	return (1);
 }

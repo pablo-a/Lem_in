@@ -6,12 +6,25 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:25:40 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 11:20:14 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 12:47:11 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft.h"
+
+t_links	*init_links(void)
+{
+	t_links*link;
+
+	link = (t_links *)		malloc(sizeof(*link));
+	if (link == NULL)
+		return (0);
+	link->lenght = 0;
+	link->first = NULL;
+	link->last = NULL;
+	return (link);
+}
 
 int		already_link(t_room *room, char *tofind)
 {

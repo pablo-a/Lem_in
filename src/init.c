@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 10:40:00 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 13:44:43 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ int		get_next_space(char *str)
 	return (len);
 }
 
-t_links	*init_links(void)
+int		init_pathes(t_env *env)
 {
-	t_links	*link;
+	t_path_pile	*pile_path;
 
-	link = (t_links *)malloc(sizeof(*link));
-	if (link == NULL)
-		return (0);
-	link->lenght = 0;
-	link->first = NULL;
-	link->last = NULL;
-	return (link);
+	pile_path = (t_path_pile *)malloc(sizeof(*pile_path));
+	pile_path->nb_path = 0;
+	pile_path->first = NULL;
+	pile_path->last = NULL;
+	env->pathes = pile_path;
+	return (1);
 }
 
 int		new_ant(int id, t_env *env)
@@ -75,8 +74,8 @@ int			init_ants(t_env *env)
 {
 	int		i;
 
-	i = 0;
-	while (i < env->nb_ants)
+	i = 1;
+	while (i <= env->nb_ants)
 	{
 		new_ant(i, env);
 		i++;
