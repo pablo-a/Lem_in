@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 16:29:37 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 11:21:37 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define PARSE_LINK 3
 
 # define ROOM(key) env->tab_room->tab[key]
+# define VISITE(room) room->visite
+# define POIDS(room) room->poids
+# define PERE(room) room->father
 
 # define ERROR(str) ft_putendl(str); exit(0)
 
@@ -86,6 +89,20 @@ typedef struct	s_hashtable
 	struct s_room	**tab;
 }				t_hashtable;
 
+typedef struct	s_path_pile
+{
+	int				nb_path;
+	struct s_path	*first;
+	struct s_path	*last;
+}				t_path_pile;
+
+typedef struct	s_path
+{
+	int				len;
+	struct s_room	*room;
+	struct s_path	*next;
+}				t_path;
+
 /*
 ** structure principale, contient une table de hash avec une salle dans
 ** chaque case. contient les fourmis.
@@ -98,6 +115,7 @@ typedef struct	s_env
 	struct s_room		*ending_room;
 	struct s_hashtable	*tab_room;
 	struct s_ant		*lst_ants;
+	struct s_path_pile	*pathes;
 
 }				t_env;
 

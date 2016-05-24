@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 14:03:23 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/24 10:40:00 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		init_env(t_env *env)
 	env->nb_ants = 0;
 	env->tab_room = create_table(SIZE_TAB);
 	env->lst_ants = NULL;
+	env->pathes = NULL;
 	return (0);
 }
 
