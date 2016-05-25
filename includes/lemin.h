@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 13:36:48 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 12:16:32 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct	s_env
 ****************************** FUNCTIONS LEMIN *********************************
 */
 
+int				show_tab(t_env env);
+
 /*
 **************************** PARSING *******************************************
 */
@@ -170,6 +172,8 @@ int				free_pile(t_links **pile);
 t_path			*new_path(void);
 int				append_path(t_path_pile *pile_path, t_path *path);
 int				append_node_path(t_path *path, t_room *room);
+int				compare_path(t_path *p1, t_path *p2);
+int				same_pathes(t_env *env);
 
 /*
 ** *********************** HASH TABLE ******************************************
@@ -188,5 +192,11 @@ int				mark_path(t_env *env, int num, t_room *current_pos);
 int				get_marked_path(t_env *env, t_room *current_pos);
 int				possible_to_resolve(t_env *env, t_room *current_pos);
 int				resolve(t_env *env);
+
+int				reset_poids(t_env *env);
+int				how_many_path_to_use(t_env *env);
+int				its_over(t_env *env);
+int				move_one_turn(t_env *env, int nb);
+int				move_ants(t_env *env);
 
 #endif

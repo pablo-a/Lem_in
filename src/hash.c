@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:09:14 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/19 12:07:51 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 11:22:26 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,9 @@ int			insert_tab(char *key, t_room *room, t_env *env)
 
 	index = hash(key);
 	if (ROOM(index) == NULL)
-	{
-		ft_putendl("case vide");
 		ROOM(index) = room;
-	}
 	else
 	{
-		ft_putendl("case pleine");
 		tempo = ROOM(index);
 		while (tempo->collision != NULL && ft_strcmp(tempo->name, key) != 0)
 			tempo = tempo->collision;

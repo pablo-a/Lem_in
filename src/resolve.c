@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 15:48:30 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 12:15:47 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		get_marked_path(t_env *env, t_room *current_pos)
 	t_path	*path;
 
 	path = new_path();
-	append_node_path(path, current_pos);
 	while (current_pos->type != ENTRY)
 	{
 		append_node_path(path, current_pos);
@@ -67,7 +66,7 @@ int		show_pathes(t_env *env)
 	while (path != NULL)
 	{
 		node = path->last;
-		while (node->prev != NULL)
+		while (node != NULL)
 		{
 			ft_printf(" ==> %s", node->room->name);
 			node = node->prev;
@@ -118,12 +117,17 @@ int		resolve(t_env *env)
 		wrong_map();
 	init_ants(env);
 	init_pathes(env);
-	while (mark_path(env, numero_path, env->starting_room) &&
-			(size_t)env->ending_room->visite == numero_path)
+	while (!same_pathes(env))
 	{
+		mark_path(env, numero_path, env->starting_room);
 		get_marked_path(env, env->ending_room);
 		numero_path++;
+		reset_poids(env);
 	}
+	env->pathes->nb_path--;
+	env->pathes->last = env->pathes->last->prev_path;
+	env->pathes->last->next_path = NULL;
+	//free last path;
 	show_tab(*env);
 	show_pathes(env);
 	return (1);

@@ -6,12 +6,13 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 12:16:23 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/24 15:23:28 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 12:16:02 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "ft_printf.h"
+#include "libft.h"
 
 int		show_tab(t_env env)
 {
@@ -51,5 +52,6 @@ int		main(void)
 	init_env(&env);
 	parse(&env);
 	resolve(&env);
+	move_ants(&env);
 	return (0);
 }

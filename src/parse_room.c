@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:14:11 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 17:08:50 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 11:21:38 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		check_room(char *str)
 
 	tab = ft_strsplit(str, ' ');
 	i = ft_tablen(tab);
-	ft_printf("len = %zd\n", i);
 	if (tab[0][0] == '#' && tab[0][1] == '#' && tab[0][2] != '#')
 		return (1);
 	if (i == 3)
@@ -87,7 +86,6 @@ int		get_room(t_env *env, char *str)
 		while (str[0] == '#' && str[1] != '#')
 			get_next_line(0, &str);
 	}
-	ft_printf("type de salle : %d\n", type);
 	parse_room(env, str, type);
 	return (PARSE_ROOM);
 }

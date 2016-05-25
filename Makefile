@@ -19,6 +19,7 @@ SRCS		= src/lemin.c \
 			  src/parse_link.c \
 			  src/error.c \
 			  src/resolve.c \
+			  src/use_pathes.c \
 
 OBJS 		= $(SRCS:src/%.c=obj/%.o)
 

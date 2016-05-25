@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 12:28:03 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/23 16:33:31 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 11:22:45 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		get_ant(t_env *env, char *str)
 	if (nb_ant <= 0)
 		return (PARSE_ERROR);
 	env->nb_ants = nb_ant;
-	ft_printf("number of ants = %d\n", nb_ant);
 	return (PARSE_ROOM);
 }
 
