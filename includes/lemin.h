@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 15:32:29 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 18:39:36 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define VISITE(room) room->visite
 # define POIDS(room) room->poids
 # define PERE(room) room->father
-
+# define NEXT(node) node->next
+# define NEXT_ROOM(node) node->next->room
 # define ANT(room) room->id_ant
 # define ERROR(str) ft_putendl(str); exit(0)
 

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 15:03:46 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 17:28:05 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		show_pathes(t_env *env)
 		ft_printf("\n");
 		path = path->next_path;
 	}
+	ft_printf("\n");
 	return (1);
 }
 
@@ -116,6 +117,7 @@ int		mark_path(t_env *env, int num, t_room *current_pos)
 int		resolve(t_env *env)
 {
 	size_t	numero_path;
+	t_ant	*ant;
 
 	numero_path = 1;
 	if (env->starting_room == NULL || env->ending_room == NULL)
@@ -127,16 +129,15 @@ int		resolve(t_env *env)
 	while (!same_pathes(env))
 	{
 		mark_path(env, numero_path, env->starting_room);
-		ft_printf("ok");
 		get_marked_path(env, env->ending_room);
-		ft_printf("ok2");
 		numero_path++;
 		reset_poids(env);
-		ft_printf("ok3\n");
+		ft_printf("\n");
 	}
 	env->pathes->nb_path--;
 	env->pathes->last = env->pathes->last->prev_path;
 	env->pathes->last->next_path = NULL;
+	ant = env->lst_ants;
 	//free last path;
 	//show_tab(*env);
 	show_pathes(env);
