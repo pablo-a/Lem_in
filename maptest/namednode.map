@@ -1,0 +1,24 @@
+15
+##start
+start 23 3
+Paris 16 7
+NewYork 16 3
+Rio 16 5
+Berlin 3 9
+Rome 1 0
+Bruxelle 4 8
+##end
+end 9 5
+#TUBES
+end-Rio
+end-Rome
+start-NewYork
+London-NewYork
+Berlin-Paris
+NewYork-Berlin
+Rio-NewYork
+Paris-start
+Bruxelle-Rome
+Bruxelle-Paris
+Bruxelle-Rio
+Rome-Berlin
