@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 11:09:08 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 13:13:15 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:32:29 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define POIDS(room) room->poids
 # define PERE(room) room->father
 
+# define ANT(room) room->id_ant
 # define ERROR(str) ft_putendl(str); exit(0)
 
 typedef struct	s_ant

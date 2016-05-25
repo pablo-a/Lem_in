@@ -6,11 +6,12 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 11:27:18 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 12:14:47 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:55:24 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+#include "ft_printf.h"
 
 int		reset_poids(t_env *env)
 {
@@ -56,8 +57,42 @@ int		its_over(t_env *env)
 	return (1);
 }
 
+int		print_ant(t_ant *ant, t_room *room, int flag)
+{
+	if (flag)
+		ft_printf("L%d-%s ");
+	else
+		ft_printf("L%d-%s\n");
+	return (1);
+}
+
 int		move_one_turn(t_env *env, int nb)
 {
+	t_path		*curr_path;
+	t_node_path	*node;
+
+	curr_path = env->pathes->first;
+	while (nb--)
+	{
+		node = env->pathes->first;
+		while (PERE(node->room)->type != ENTRY)
+		{
+			if (PERE(node->room)->type == ENTRY && (ANT(node->room) == NULL ||
+			node->room->type == EXIT) && ANT(PERE(node->room)) != NULL)
+			{
+				ANT(PERE(node->room))->location = node->room;
+				ANT(PERE(node->room)) = ANT(PERE(node->room))->next;
+			}
+			else if (PERE(node->room)->id_ant != NULL && (ANT(node->room) ==
+						NULL || node->room->type == EXIT))
+			{
+				ANT(PERE(node->room))->location = node->room;
+				ANT(PERE(node->room)) = NULL;
+			}
+			node = node->next;
+		}
+		curr_path = curr_path->next_path;
+	}
 	return (0);
 }
 
