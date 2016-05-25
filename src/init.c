@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:25 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 17:04:02 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 18:53:58 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		new_ant(int id, t_env *env)
 	return (1);
 }
 
-int			init_ants(t_env *env)
+int		init_ants(t_env *env)
 {
 	int		i;
 

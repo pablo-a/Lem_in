@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:03:04 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 17:28:05 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 18:56:16 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		mark_path(t_env *env, int num, t_room *current_pos)
 			if (current_voisin->room->type == ENTRY)
 				;
 			else if ((VISITE(current_voisin->room) < num) ||
-					POIDS(current_pos) + 1 < POIDS(PERE(current_voisin->room)) + 1)
+				POIDS(current_pos) + 1 < POIDS(PERE(current_voisin->room)) + 1)
 				next_room = current_voisin->room;
 			if (next_room != NULL && VISITE(current_voisin->room) < num)
 				mark_path(env, num, next_room);
@@ -139,7 +139,6 @@ int		resolve(t_env *env)
 	env->pathes->last->next_path = NULL;
 	ant = env->lst_ants;
 	//free last path;
-	//show_tab(*env);
 	show_pathes(env);
 	return (1);
 }

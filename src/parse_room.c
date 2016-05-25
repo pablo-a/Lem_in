@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:14:11 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 11:21:38 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 18:55:01 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		check_room(char *str)
 			return (0);
 		return (1);
 	}
-	else if (i == 1 && ft_strchr(tab[0], '-') != NULL)//enlever les rooms sans coord
+	else if (i == 1 && ft_strchr(tab[0], '-') != NULL)
 		return (1);
 	else
 		return (0);
@@ -74,7 +74,7 @@ int		get_room(t_env *env, char *str)
 		wrong_input();
 	if (ft_strchr(str, '-') && str[0] != '#')
 		return (PARSE_LINK);
-	if (ft_strncmp(str, "##", 2) == 0)// traite les cas des types de salles
+	if (ft_strncmp(str, "##", 2) == 0)
 	{
 		if (ft_strcmp(str, "##start") == 0)
 			type = ENTRY;

@@ -20,6 +20,7 @@ SRCS		= src/lemin.c \
 			  src/error.c \
 			  src/resolve.c \
 			  src/use_pathes.c \
+			  src/move_ants.c
 
 OBJS 		= $(SRCS:src/%.c=obj/%.o)
 

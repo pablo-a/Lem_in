@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 10:25:40 by pabril            #+#    #+#             */
-/*   Updated: 2016/05/25 13:13:13 by pabril           ###   ########.fr       */
+/*   Updated: 2016/05/25 18:54:13 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_links	*init_links(void)
 {
 	t_links*link;
 
-	link = (t_links *)		malloc(sizeof(*link));
+	link = (t_links *)malloc(sizeof(*link));
 	if (link == NULL)
 		return (0);
 	link->lenght = 0;
@@ -70,6 +70,8 @@ int		get_link(t_env *env, char *str)
 
 	i = 0;
 	if (str[0] == '#')
+		return (PARSE_LINK);
+	if (ft_strchr(str, '-') == NULL)
 		return (PARSE_LINK);
 	while (str[i] != '-')
 		i++;
